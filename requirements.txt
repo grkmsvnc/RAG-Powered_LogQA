@@ -1,0 +1,9 @@
+faker
+sentence-transformers
+faiss-cpu
+faiss-gpu
+groq
+transformers
+torch
+accelerate
+bitsandbytes
