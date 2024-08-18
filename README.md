@@ -30,7 +30,7 @@ To generate synthetic log data:
 
 ```bash
 
-python generate_log_file.py
+python synthetic_data.py
 
 ```
 
@@ -63,6 +63,67 @@ This log entry includes details like:
 
 ## File Structure
 
-- `generate_log_file.py`: Script for generating synthetic log data.
+- `synthetic_data.py`: Script for generating synthetic log data.
 - `requirements.txt`: List of dependencies required for the project.
 - `diverse_synthetic_web_traffic.log`: Example of synthetic log data (if generated).
+
+## Log Data Cleaning and Preparation (cleaning_editing.py)
+
+The `cleaning_editing.py` script is designed to clean and prepare the log data for further processing and analysis. After generating or importing the log data, this script ensures that the data is of high quality, free from errors, inconsistencies, and missing values. Here's an overview of what this script does:
+
+### Key Features:
+
+1. **Parsing Log Data**:
+    - The script reads log entries from the file and parses each entry into individual components (IP, session ID, timestamp, method, URL, status code, etc.).
+2. **Data Cleaning**:
+    - Handles missing or invalid data, including IP addresses, timestamps, and HTTP methods.
+    - Validates HTTP status codes, request sizes, and ensures the log data is consistent and correct.
+3. **Data Enrichment**:
+    - Extracts additional insights from the data, such as the hour and day from the timestamp.
+    - Converts request sizes to megabytes for easier analysis.
+4. **Outlier Detection**:
+    - Identifies and removes outliers based on the request size (in MB) using Z-scores.
+5. **Standardization**:
+    - Ensures consistency by converting HTTP methods to uppercase.
+6. **Reporting**:
+    - Reports missing values and inconsistencies in the data after cleaning.
+
+### How to Use
+
+To use the `cleaning_editing.py` script, follow these steps:
+
+1. **Prepare the Log Data**:
+    - Ensure you have generated or imported log data in the proper format. You can use either the synthetic logs from `synthetic_data.py` or your own logs.
+2. **Run the Script**:
+    - The script reads the log data from a file, cleans and validates it, and then saves the cleaned data in both CSV and Excel formats.
+    
+    ```bash
+    bashKodu kopyala
+    python cleaning_editing.py
+    
+    ```
+    
+3. **Check the Cleaned Data**:
+    - After the script runs, you will find two new files in your project directory:
+        - `high_quality_log.csv`
+        - `high_quality_log.xlsx`
+    - These files contain the cleaned and validated log data, ready for further analysis or use in the Q&A system.
+
+### Example of the Cleaning Process:
+
+- **IP Validation**: Ensures all IP addresses are valid and correctly formatted.
+- **Timestamp Validation**: Converts timestamps into proper datetime format, removing invalid entries.
+- **HTTP Method Validation**: Filters out invalid or non-standard HTTP methods, such as GET, POST, PUT, DELETE, etc.
+- **Outlier Removal**: Request sizes are evaluated, and any outliers (based on Z-scores) are removed to ensure data quality.
+
+### Additional Features:
+
+- **Extracting Hour and Day**: The script enriches the data by extracting the hour of the day and the day of the week from each log entry, allowing for temporal analysis.
+- **Missing Value Handling**: Missing values in critical fields (like IP address, timestamp, and URL) are removed, while missing values in non-critical fields (such as referrer and user agent) are replaced with placeholders.
+
+### File Structure
+
+- `cleaning_editing.py`: Script for parsing, cleaning, and validating the log data.
+- `high_quality_log.csv`: Cleaned log data in CSV format.
+- `high_quality_log.xlsx`: Cleaned log data in Excel format.
+
