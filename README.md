@@ -98,7 +98,7 @@ To use the `cleaning_editing.py` script, follow these steps:
     - The script reads the log data from a file, cleans and validates it, and then saves the cleaned data in both CSV and Excel formats.
     
     ```bash
-    bashKodu kopyala
+    
     python cleaning_editing.py
     
     ```
@@ -126,4 +126,80 @@ To use the `cleaning_editing.py` script, follow these steps:
 - `cleaning_editing.py`: Script for parsing, cleaning, and validating the log data.
 - `high_quality_log.csv`: Cleaned log data in CSV format.
 - `high_quality_log.xlsx`: Cleaned log data in Excel format.
+
+## Log Data Analysis and Visualization (data_analysis.py)
+
+The `data_analysis.py` script is designed to provide deeper insights into the cleaned web traffic logs through data analysis and visualizations. This script allows you to better understand traffic patterns, user behavior, and system performance by analyzing various attributes of the log data, such as HTTP methods, visited URLs, IP addresses, and more.
+
+### Key Features:
+
+1. **HTTP Method Distribution**:
+    - Visualizes the distribution of HTTP methods (GET, POST, etc.) used by users to interact with the website.
+2. **Top 10 Most Visited URLs**:
+    - Identifies and visualizes the most frequently visited pages on the website.
+3. **Top 10 Most Frequent IP Addresses**:
+    - Displays the top 10 IP addresses generating the most traffic, providing insights into potential high-traffic users or bots.
+4. **Traffic Distribution by Hour**:
+    - Analyzes website traffic by the hour of the day, helping identify peak traffic times.
+5. **Traffic Distribution by Day**:
+    - Shows the distribution of traffic over the days of the week to understand which days see the most activity.
+6. **Top 10 Most Used Browsers (User-Agent)**:
+    - Lists and visualizes the most common user agents (browsers and devices) used to access the website.
+7. **Top 10 Referring Sources (Referrers)**:
+    - Displays the top referrer URLs driving traffic to the website, helping you understand where users are coming from.
+
+### How to Use
+
+1. **Prepare the Cleaned Data**:
+    - Ensure that you have run the `cleaning_editing.py` script to generate the cleaned log data. The cleaned data should be saved as an Excel file (`high_quality_log.xlsx`).
+2. **Run the Data Analysis Script**:
+    - The script reads the cleaned log data and performs various analyses. It generates visualizations that provide insights into user behavior and traffic patterns.
+    
+    ```bash
+    
+    python data_analysis.py
+    
+    ```
+    
+3. **Visual Output**:
+    - The script will output several visualizations, including bar plots and histograms, that summarize the key metrics of your website's traffic.
+
+### Detailed Analysis:
+
+1. **HTTP Method Distribution**:
+    - The script counts and plots the distribution of HTTP methods (GET, POST, etc.). This helps identify which types of requests are most commonly made by users.
+2. **Top 10 Most Visited URLs**:
+    - The most frequently visited URLs are identified and displayed in a bar plot, helping you understand which pages are most popular among users.
+3. **Top 10 Most Frequent IP Addresses**:
+    - A bar plot shows the IP addresses that generate the most traffic, allowing for easy identification of high-traffic users or potential malicious activity.
+4. **Traffic Distribution by Hour**:
+    - This bar chart visualizes how traffic is distributed throughout the day, helping to identify peak traffic times and plan for resource allocation.
+5. **Traffic Distribution by Day**:
+    - The traffic distribution by day is shown, revealing patterns about which days of the week see the most traffic.
+6. **Top 10 Most Used Browsers (User-Agent)**:
+    - The most common browsers and devices used by visitors are displayed, helping you optimize your site for the most popular platforms.
+7. **Top 10 Referring Sources (Referrers)**:
+    - The top referral sources driving traffic to your website are displayed in a horizontal bar chart. This can be useful for understanding your website's marketing effectiveness or social media impact.
+
+### Example Output
+
+Here are examples of the insights you can expect:
+
+- **HTTP Method Distribution**:
+    
+    A bar plot showing the proportion of each HTTP method (e.g., GET, POST) used in the traffic logs.
+    
+- **Top 10 Visited URLs**:
+    
+    A bar plot showing the top 10 most visited pages on your website, helping you understand which content is most engaging.
+    
+- **Traffic Distribution by Hour**:
+    
+    A bar chart showing when users are most active on your site, allowing you to identify peak traffic times and optimize performance during those hours.
+    
+
+### File Structure
+
+- `data_analysis.py`: Script for performing data analysis and generating visualizations from the cleaned log data.
+- `high_quality_log.xlsx`: Cleaned log data (generated from the `cleaning_editing.py` script) used as input for analysis.
 
