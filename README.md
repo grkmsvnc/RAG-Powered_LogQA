@@ -255,7 +255,7 @@ The `embedding_vectorstorage.py` script is designed to transform the cleaned log
 
 - **Final Embeddings Shape**: The shape of the final combined embeddings is printed to ensure the correct size of the vector representation.
     
-    ```sql
+    ```bash
     
     Final embeddings shape: (10000, 768)
     
@@ -263,7 +263,7 @@ The `embedding_vectorstorage.py` script is designed to transform the cleaned log
     
 - **FAISS Index Population**: The total number of vectors added to the FAISS index is printed.
     
-    ```css
+    ```bash
     
     Total of 10000 vectors added to FAISS.
     
@@ -271,7 +271,7 @@ The `embedding_vectorstorage.py` script is designed to transform the cleaned log
     
 - **Nearest Neighbor Search**: After querying the FAISS index, the indices and distances of the nearest neighbors are displayed. The closest log entry is printed for reference.
     
-    ```lua
+    ```bash
     
     Indices of nearest vectors found: [[0 1 2 3 4]]
     Distances to the nearest vectors: [[0.000000 0.250123 0.300321 ...]]
@@ -317,7 +317,7 @@ The **Llama3-70B** model was selected as the best open-source model for this sys
     - The script allows users to input a query (e.g., "Are there any errors in the system?"), which is then processed to search the FAISS index and generate a response using **Groq API** and **Llama3-70B**.
     
     ```bash
-    bashKodu kopyala
+    
     python llama3_70b_groq.py
     
     ```
@@ -335,3 +335,55 @@ The **Llama3-70B** model was selected as the best open-source model for this sys
     - The FAISS index is queried to retrieve the closest log entries based on the query embedding. This ensures that the most relevant logs are returned for further analysis.
 4. **Groq API Response Generation**:
     - Once the relevant logs are retrieved, the **Groq API** is used to generate a detailed response using the **Llama3-70B** model. The response includes an analysis of the log entries and addresses the user's question directly, identifying potential issues or patterns.
+
+
+## Enhanced Log Querying with Llama3-70B and Groq API (llama3_70b_groq_advanced.py)
+
+The `llama3_70b_groq_advanced.py` script builds upon the previous implementation to enhance both performance and user experience. The main focus of this advanced version is to allow users to specify more detailed parameters for their queries, leading to more refined and relevant results in the **Retrieval-Augmented Generation (RAG)** system.
+
+### Key Enhancements:
+
+1. **User-Specific Query Refinement**:
+    - Users are now prompted to provide more granular details for their queries, including:
+        - The hour of the day to analyze traffic.
+        - Specific HTTP status codes (e.g., 200, 404) to focus on certain types of responses.
+        - The request size in megabytes (MB) for handling payload-related questions.
+        - The day of the week to filter logs by temporal context.
+        - The number of nearest log entries to retrieve from the FAISS index.
+    
+    These enhancements allow for more targeted searches, resulting in more precise and meaningful results.
+    
+2. **Improved User Interface**:
+    - The script introduces a more user-friendly, interactive command-line interface (CLI). Users are guided through the process step-by-step, allowing them to refine their queries or exit the system when needed.
+3. **Dynamic Query Processing**:
+    - The query embedding is dynamically generated based on the user's input, ensuring that both textual and numerical features (such as hour, status, and size) are combined effectively to match the FAISS index and return the most relevant log entries.
+4. **Enhanced Log Retrieval**:
+    - Similar to the previous version, this script uses the **FAISS index** to search for the nearest log entries. However, users now have more control over how many entries to retrieve, making the analysis more flexible.
+
+### How to Use
+
+1. **Run the Log Query Script**:
+    - The script prompts the user for a query and additional parameters, allowing for a more interactive and customized experience. Users can specify various query details or leave them blank to use default values.
+    
+    ```bash
+    
+    python llama3_70b_groq_advanced.py
+    
+    ```
+    
+2. **Follow the Interactive Prompts**:
+    - The user-friendly system will guide you through specifying:
+        - Query text (e.g., "Are there any errors in the system?")
+        - Query hour (default: 12)
+        - HTTP status code (default: 200)
+        - Request size in MB (default: 0.01)
+        - Day of the week (default: Monday)
+        - Number of nearest log entries to retrieve (default: 5)
+3. **Check the Output**:
+    - After processing the query, the system retrieves the relevant log entries and uses the **Groq API** with **Llama3-70B** to generate a detailed, task-specific response.
+
+### File Structure
+
+- `llama3_70b_groq_advanced.py`: Advanced version of the script for querying the FAISS index and generating responses using **Groq API** with more user-specific query options.
+- `faiss_index.bin`: FAISS index containing stored log embeddings.
+- `high_quality_log.xlsx`: Log data used for FAISS search and analysis.
