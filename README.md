@@ -285,3 +285,53 @@ The `embedding_vectorstorage.py` script is designed to transform the cleaned log
 - `embedding_vectorstorage.py`: Script for generating embeddings from log data and storing them in a FAISS index for efficient vector-based search.
 - `final_embeddings.npy`: Saved embeddings from the log data.
 - `faiss_index.bin`: FAISS index with stored embeddings for fast retrieval.
+
+
+## Log Querying with Llama3-70B Model and Groq API (llama3_70b_groq.py)
+
+In **Retrieval-Augmented Generation (RAG)** systems, security is a critical concern, especially when handling sensitive documents and logs related to companies and organizations. Due to these concerns, large language models such as **OpenAI's GPT models**, **Claude**, and **Gemini** have not been used in this system to avoid potential security risks associated with API calls to third-party services. Instead, by leveraging sufficient **GPU resources**, the **Llama3-70B** model can be run **locally**, ensuring full control over data security and eliminating the need to share sensitive information with external providers.
+
+### Why Llama3-70B?
+
+![Ekran Görüntüsü (441)](https://github.com/user-attachments/assets/076cdf20-3468-459e-8124-fcabcd9a6786)
+
+
+The **Llama3-70B** model was selected as the best open-source model for this system because of its high performance, achieving a score of **0.95**. Although it tied with **Alibaba's qwen2-72b-instruct**, Llama3-70B was chosen due to qwen2-72b-instruct producing 60% longer responses, which could lead to increased costs and potentially slower response times. Hence, Llama3-70B provides an optimal balance between accuracy and efficiency.
+
+### Key Features:
+
+1. **FAISS Index Querying**:
+    - The script queries a **FAISS** index to retrieve the closest log entries based on embeddings generated from user queries. The logs are retrieved in vector form, allowing for quick, scalable searches.
+2. **Embedding Combination**:
+    - The query embeddings are dynamically generated from the user's text input and combined with numerical features (e.g., hour, status, request size) and one-hot encoded categorical data (e.g., day of the week). This ensures that the search is highly contextual and accurate.
+3. **Groq API Integration**:
+    - The script utilizes the **Groq API** to generate detailed, human-readable responses based on the logs retrieved from FAISS. The response not only addresses the user query but also analyzes the log data to identify trends and issues.
+4. **Advanced Model (Llama3-70B)**:
+    - **Llama3-70B** is used to generate comprehensive answers, making use of the log data to provide insights and detect problems in the system.
+
+### How to Use
+
+1. **Prepare FAISS Index and Log Data**:
+    - Ensure that the FAISS index and cleaned log data are available. The FAISS index should be stored in a file (e.g., `faiss_index.bin`), and the log data should be loaded from an Excel file (`high_quality_log.xlsx`).
+2. **Run the Log Query Script**:
+    - The script allows users to input a query (e.g., "Are there any errors in the system?"), which is then processed to search the FAISS index and generate a response using **Groq API** and **Llama3-70B**.
+    
+    ```bash
+    bashKodu kopyala
+    python llama3_70b_groq.py
+    
+    ```
+    
+3. **Check the Output**:
+    - After running the script, the system will output the nearest log entries and generate a detailed response to the user query, providing valuable insights into the system’s behavior.
+
+### Detailed Steps:
+
+1. **Loading the FAISS Index and Log Data**:
+    - The FAISS index is loaded from a file (`faiss_index.bin`), and the log data is read from an Excel file (`high_quality_log.xlsx`).
+2. **Query Embedding Creation**:
+    - The user query is transformed into a dense vector representation using a **Sentence-Transformer** model. This embedding is combined with numeric and one-hot encoded features (hour, status code, request size, day of the week) to match the FAISS index.
+3. **FAISS Search**:
+    - The FAISS index is queried to retrieve the closest log entries based on the query embedding. This ensures that the most relevant logs are returned for further analysis.
+4. **Groq API Response Generation**:
+    - Once the relevant logs are retrieved, the **Groq API** is used to generate a detailed response using the **Llama3-70B** model. The response includes an analysis of the log entries and addresses the user's question directly, identifying potential issues or patterns.
