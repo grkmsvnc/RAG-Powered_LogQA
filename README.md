@@ -387,3 +387,56 @@ The `llama3_70b_groq_advanced.py` script builds upon the previous implementation
 - `llama3_70b_groq_advanced.py`: Advanced version of the script for querying the FAISS index and generating responses using **Groq API** with more user-specific query options.
 - `faiss_index.bin`: FAISS index containing stored log embeddings.
 - `high_quality_log.xlsx`: Log data used for FAISS search and analysis.
+
+## Enhanced Local Log Querying with Quantized Meta-Llama Model (llama3_1_8b_local_gpu.py)
+
+In this implementation, we enhance the **Retrieval-Augmented Generation (RAG)** system by running a **locally-hosted model**, specifically **Meta-Llama-3.1-8B-Instruct**. This setup provides strong data security, as no external API is needed, and ensures that sensitive information from logs is not shared with third-party services. The model is **quantized** to reduce memory usage while maintaining high performance, enabling it to run efficiently on local hardware.
+
+### Why Meta-Llama-3.1-8B-Instruct?
+![Ekran Görüntüsü (442)](https://github.com/user-attachments/assets/349db796-422e-44ca-a412-49a4de4d54cb)
+
+
+The **Meta-Llama-3.1-8B-Instruct** model was selected based on experimental results, where it performed better than other versions in the 8B series. This model provided more accurate responses, making it ideal for the **log analysis** tasks involved in this system.
+
+In addition, according to research conducted by [**Rungalileo.io**](https://www.rungalileo.io/), this model has surpassed several recent large models like **Snowflake's Arctic**, achieving a score of **0.89**. It is an ideal choice for smaller-scale applications that require strong inference performance without the heavy memory demands of larger models like Llama-70B.
+
+This model allows us to leverage **quantized 4-bit precision**, which significantly reduces memory usage and computation while still providing high-quality responses. This makes it possible to run the model locally without requiring extensive GPU resources, ensuring full control over the data pipeline and enhancing system privacy.
+
+### Key Enhancements in This Version:
+
+1. **Local Model for Data Security**:
+    - The system now operates entirely offline with the **Meta-Llama-3.1-8B-Instruct** model, ensuring that sensitive logs are never shared with external services. This approach maximizes data privacy and security.
+2. **Quantized Model for Lower Memory Usage**:
+    - The model is **quantized to 4-bit precision**, reducing memory and computational requirements without sacrificing much in terms of accuracy. This allows the system to be deployed on local hardware with more modest resources.
+3. **Same FAISS Integration for Log Retrieval**:
+    - **FAISS** is still used to retrieve the nearest log entries based on vector embeddings, ensuring efficient and fast search functionality.
+4. **Improved Log Analysis**:
+    - Using the **Meta-Llama-3.1-8B-Instruct** model, the system can generate detailed and accurate responses to user queries, analyzing logs and identifying key patterns or issues.
+
+### How to Use
+
+1. **Run the Log Query Script**:
+    - The system allows users to input a query (e.g., "Why did the system return an error?"), and it processes the query to retrieve relevant log entries from the FAISS index. The retrieved logs are then analyzed by the **Meta-Llama-3.1-8B-Instruct** model to generate a detailed response.
+    
+    ```bash
+    
+    python llama3_1_8b_local_gpu.py
+    
+    ```
+    
+2. **Follow the Interactive Prompts**:
+    - Users can specify details like the hour of the day, HTTP status codes, request size, and the day of the week, allowing for a more tailored query and analysis.
+3. **Check the Output**:
+    - After processing the query, the system retrieves the most relevant log entries and uses the **Meta-Llama-3.1-8B-Instruct** model to generate a detailed response, offering insights into system behavior, errors, or patterns detected in the logs.
+
+### Model Selection and Performance:
+
+- **Meta-Llama-3.1-8B-Instruct** was chosen based on internal experiments, where it outperformed other models in its class for log analysis tasks. The model offered better accuracy and more relevant answers.
+- According to [**Rungalileo.io**](https://www.rungalileo.io/), this model has outperformed many larger models like **Snowflake's Arctic**, achieving a competitive score of **0.89**.
+- **Quantized at 4-bit precision**, this model significantly reduces the memory footprint while maintaining high performance. This allows for local deployment without requiring extensive computational resources, making it suitable for smaller-scale use cases where data privacy and security are critical.
+
+### File Structure
+
+- `llama3_1_8b_local_gpu.py`: Script for querying the FAISS index with a user query, retrieving log entries, and generating a response using **Meta-Llama-3.1-8B-Instruct** running locally.
+- `faiss_index.bin`: FAISS index containing stored log embeddings.
+- `high_quality_log.xlsx`: Log data used for FAISS search and analysis.
