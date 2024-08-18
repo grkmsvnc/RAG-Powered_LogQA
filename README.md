@@ -203,3 +203,85 @@ Here are examples of the insights you can expect:
 - `data_analysis.py`: Script for performing data analysis and generating visualizations from the cleaned log data.
 - `high_quality_log.xlsx`: Cleaned log data (generated from the `cleaning_editing.py` script) used as input for analysis.
 
+## Embedding Creation and Vector Storage (embedding_vectorstorage.py)
+
+The `embedding_vectorstorage.py` script is designed to transform the cleaned log data into embeddings and store them efficiently for fast retrieval using **FAISS**. This step is crucial for the question-answering system, as it allows for efficient search and retrieval of relevant log entries based on user queries.
+
+### Key Features:
+
+1. **Textual Feature Embedding**:
+    - Extracts textual features (URLs, referrers, user agents, HTTP methods, cookies, and timestamps) and converts them into dense vector representations using a **Sentence-Transformer** model.
+2. **Numerical and Categorical Embedding**:
+    - Normalizes numerical features (hour, status, request size) and one-hot encodes categorical features (day of the week) to create embeddings for these attributes.
+3. **Combining Embeddings**:
+    - Merges textual embeddings with numerical and categorical embeddings to form a final representation of each log entry.
+4. **FAISS Vector Storage**:
+    - Utilizes **FAISS** to store these embeddings, allowing for efficient vector-based similarity searches. This enables fast and scalable retrieval of the most relevant log entries based on user queries.
+5. **Querying the FAISS Index**:
+    - The script includes an example of how to query the FAISS index using an embedding (e.g., the first log entry) and retrieve the top-k nearest neighbors (log entries).
+
+### How to Use
+
+1. **Prepare the Cleaned Data**:
+    - Ensure that you have cleaned log data available in the Excel format (`high_quality_log.xlsx`). This is the input for the embedding creation and storage process.
+2. **Run the Embedding and Storage Script**:
+    - The script processes the cleaned log data to generate embeddings and stores them in a FAISS index for efficient retrieval.
+    
+    ```bash
+    
+    python embedding_vectorstorage.py
+    
+    ```
+    
+3. **Check the Output**:
+    - After running the script, you will find the following files in your project directory:
+        - `final_embeddings.npy`: The final embeddings generated from the log data.
+        - `faiss_index.bin`: The FAISS index containing the stored embeddings for efficient retrieval.
+
+### Detailed Steps:
+
+1. **Text Feature Extraction and Embedding**:
+    - The script extracts key textual features such as URL, referrer, user agent, HTTP method, and timestamp. These features are combined into a single string for each log entry, which is then embedded using a **Sentence-Transformer** model (e.g., `all-mpnet-base-v2`).
+2. **Numerical and Categorical Feature Preparation**:
+    - Numerical features (hour, status code, request size) are normalized using `StandardScaler`, while the day of the week is one-hot encoded to represent categorical data.
+3. **Embedding Combination**:
+    - The textual embeddings are combined with the numerical and categorical embeddings to form the final log entry representation. These combined embeddings serve as the input for the FAISS index.
+4. **FAISS Index Creation**:
+    - The final embeddings are added to a FAISS index using **L2 (Euclidean) distance** for fast similarity search. The FAISS index allows for efficient querying of log entries based on their vector representations.
+5. **Querying the FAISS Index**:
+    - The script includes an example query using the first log entry's embedding to search for the top 5 nearest neighbors in the FAISS index. It returns the indices and distances of the most similar log entries.
+
+### Example Output:
+
+- **Final Embeddings Shape**: The shape of the final combined embeddings is printed to ensure the correct size of the vector representation.
+    
+    ```sql
+    
+    Final embeddings shape: (10000, 768)
+    
+    ```
+    
+- **FAISS Index Population**: The total number of vectors added to the FAISS index is printed.
+    
+    ```css
+    
+    Total of 10000 vectors added to FAISS.
+    
+    ```
+    
+- **Nearest Neighbor Search**: After querying the FAISS index, the indices and distances of the nearest neighbors are displayed. The closest log entry is printed for reference.
+    
+    ```lua
+    
+    Indices of nearest vectors found: [[0 1 2 3 4]]
+    Distances to the nearest vectors: [[0.000000 0.250123 0.300321 ...]]
+    Closest log entry: (Details of the log entry)
+    
+    ```
+    
+
+### File Structure
+
+- `embedding_vectorstorage.py`: Script for generating embeddings from log data and storing them in a FAISS index for efficient vector-based search.
+- `final_embeddings.npy`: Saved embeddings from the log data.
+- `faiss_index.bin`: FAISS index with stored embeddings for fast retrieval.
