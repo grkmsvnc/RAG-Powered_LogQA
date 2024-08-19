@@ -168,18 +168,31 @@ The `data_analysis.py` script is designed to provide deeper insights into the cl
 
 1. **HTTP Method Distribution**:
     - The script counts and plots the distribution of HTTP methods (GET, POST, etc.). This helps identify which types of requests are most commonly made by users.
+      ![http](https://github.com/user-attachments/assets/7bdee407-13ab-47b3-9ad8-bf518eacee17)
+
 2. **Top 10 Most Visited URLs**:
     - The most frequently visited URLs are identified and displayed in a bar plot, helping you understand which pages are most popular among users.
+     ![url](https://github.com/user-attachments/assets/a0eb73b7-afab-4ec0-b0c2-91c389473589)
+ 
 3. **Top 10 Most Frequent IP Addresses**:
     - A bar plot shows the IP addresses that generate the most traffic, allowing for easy identification of high-traffic users or potential malicious activity.
+      ![ip](https://github.com/user-attachments/assets/eb7aeb71-fb2d-4440-b095-32845039bca2)
+
 4. **Traffic Distribution by Hour**:
     - This bar chart visualizes how traffic is distributed throughout the day, helping to identify peak traffic times and plan for resource allocation.
+      ![trafik_hour](https://github.com/user-attachments/assets/c502bcf4-eecd-47ce-afb0-d67ced452270)
+
 5. **Traffic Distribution by Day**:
     - The traffic distribution by day is shown, revealing patterns about which days of the week see the most traffic.
+      ![trafik_day](https://github.com/user-attachments/assets/d9cf5c22-af7a-4476-b6cf-fb0606ce626d)
+
 6. **Top 10 Most Used Browsers (User-Agent)**:
     - The most common browsers and devices used by visitors are displayed, helping you optimize your site for the most popular platforms.
+      
 7. **Top 10 Referring Sources (Referrers)**:
     - The top referral sources driving traffic to your website are displayed in a horizontal bar chart. This can be useful for understanding your website's marketing effectiveness or social media impact.
+      ![refer](https://github.com/user-attachments/assets/ae173238-2e4b-4c82-bcb7-1e50aa2ca15d)
+
 
 ### Example Output
 
@@ -440,3 +453,44 @@ This model allows us to leverage **quantized 4-bit precision**, which significan
 - `llama3_1_8b_local_gpu.py`: Script for querying the FAISS index with a user query, retrieving log entries, and generating a response using **Meta-Llama-3.1-8B-Instruct** running locally.
 - `faiss_index.bin`: FAISS index containing stored log embeddings.
 - `high_quality_log.xlsx`: Log data used for FAISS search and analysis.
+
+## User-Friendly Advanced Log Analysis System with Meta-Llama (llama3_1_8b_local_gpu_advanced.py)
+
+This version of the **Retrieval-Augmented Generation (RAG)** system enhances the user experience with a **command-line interface (CLI)** and introduces advanced query features. Using the **Meta-Llama-3.1-8B-Instruct** model, which is **quantized** for lower memory usage, the system runs locally, ensuring maximum data security and efficiency.
+
+### Key Features:
+
+1. **Advanced Query System**:
+    - This version features an interactive CLI that allows users to input queries with additional parameters such as hour, HTTP status code, request size, day of the week, and the number of log entries to retrieve. If left blank, default values are used, making it easier for users to interact with the system.
+2. **Local Model for Data Security**:
+    - The system runs the **Meta-Llama-3.1-8B-Instruct** model locally, ensuring that no sensitive log data is shared with external services. The model is **quantized to 4-bit precision**, reducing memory requirements while maintaining strong performance.
+3. **Efficient Log Retrieval with FAISS**:
+    - The system uses **FAISS** to efficiently retrieve the nearest log entries based on vector embeddings generated from the user’s query. This ensures fast, scalable, and accurate log searches.
+4. **Detailed Log Analysis**:
+    - Once the relevant logs are retrieved, they are analyzed by the **Meta-Llama-3.1-8B-Instruct** model, which generates a detailed response based on the user’s query. This response includes insights into patterns, trends, and potential issues in the system logs.
+
+### How to Use
+
+1. **Run the Advanced Log Analysis System**:
+    - The system accepts user queries and additional parameters through an interactive CLI. Users can customize their queries by specifying parameters such as hour, status code, request size, and day of the week.
+    
+    ```bash
+    
+    python llama3_1_8b_local_gpu_advanced.py
+    
+    ```
+    
+2. **Follow the Prompts**:
+    - The CLI will prompt you to enter a query and, if desired, specify parameters. If a parameter is left blank, default values will be applied to keep the process simple and intuitive.
+3. **Check the Results**:
+    - After processing the query, the system retrieves the relevant log entries and generates a response using the **Meta-Llama-3.1-8B-Instruct** model. The output includes detailed insights based on the logs and user query.
+
+### File Structure
+
+- `llama3_1_8b_local_gpu_advanced.py`: Main script for the advanced log analysis system using the CLI.
+- `faiss_index.bin`: FAISS index containing log embeddings.
+- `high_quality_log.xlsx`: Log data used for FAISS search and analysis.
+
+### Summary
+
+The **llama3_1_8b_local_gpu_advanced.py** script enhances both user interaction and system performance. By combining a powerful, locally hosted **Meta-Llama-3.1-8B-Instruct** model with an advanced query system, this version provides secure, efficient, and detailed log analysis tailored to user input.
