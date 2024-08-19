@@ -168,22 +168,27 @@ The `data_analysis.py` script is designed to provide deeper insights into the cl
 
 1. **HTTP Method Distribution**:
     - The script counts and plots the distribution of HTTP methods (GET, POST, etc.). This helps identify which types of requests are most commonly made by users.
+      
       ![http](https://github.com/user-attachments/assets/7bdee407-13ab-47b3-9ad8-bf518eacee17)
 
 2. **Top 10 Most Visited URLs**:
     - The most frequently visited URLs are identified and displayed in a bar plot, helping you understand which pages are most popular among users.
+      
      ![url](https://github.com/user-attachments/assets/a0eb73b7-afab-4ec0-b0c2-91c389473589)
  
 3. **Top 10 Most Frequent IP Addresses**:
     - A bar plot shows the IP addresses that generate the most traffic, allowing for easy identification of high-traffic users or potential malicious activity.
+      
       ![ip](https://github.com/user-attachments/assets/eb7aeb71-fb2d-4440-b095-32845039bca2)
 
 4. **Traffic Distribution by Hour**:
     - This bar chart visualizes how traffic is distributed throughout the day, helping to identify peak traffic times and plan for resource allocation.
+      
       ![trafik_hour](https://github.com/user-attachments/assets/c502bcf4-eecd-47ce-afb0-d67ced452270)
 
 5. **Traffic Distribution by Day**:
     - The traffic distribution by day is shown, revealing patterns about which days of the week see the most traffic.
+      
       ![trafik_day](https://github.com/user-attachments/assets/d9cf5c22-af7a-4476-b6cf-fb0606ce626d)
 
 6. **Top 10 Most Used Browsers (User-Agent)**:
@@ -191,6 +196,7 @@ The `data_analysis.py` script is designed to provide deeper insights into the cl
       
 7. **Top 10 Referring Sources (Referrers)**:
     - The top referral sources driving traffic to your website are displayed in a horizontal bar chart. This can be useful for understanding your website's marketing effectiveness or social media impact.
+      
       ![refer](https://github.com/user-attachments/assets/ae173238-2e4b-4c82-bcb7-1e50aa2ca15d)
 
 
