@@ -8,7 +8,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from sklearn.preprocessing import StandardScaler
 
 
-os.environ["HF_TOKEN"] = "enter_your_hf_token"
+os.environ["HF_TOKEN"] = "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"
 
 hf_token = os.environ["HF_TOKEN"]  # HF Token now loaded from the environment variable
 
