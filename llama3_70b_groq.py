@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from groq import Groq
 
 # Set the API key for Groq
-os.environ["GROQ_API_KEY"] = "enter_your_groq_token"
+os.environ["GROQ_API_KEY"] = "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"
 
 # 1. Load FAISS index from a file
 def load_faiss_index(file_name='faiss_index.bin'):
