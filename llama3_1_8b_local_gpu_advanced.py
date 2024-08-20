@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sentence_transformers import SentenceTransformer
 
 # Hugging Face Token
-os.environ["HF_TOKEN"] = "enter_your_hf_token"  # Your Hugging Face Token goes here
+os.environ["HF_TOKEN"] = "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"  # Your Hugging Face Token goes here
 hf_token = os.environ["HF_TOKEN"]  # HF Token loaded from the environment variable
 
 # 1. Load FAISS index from a file
