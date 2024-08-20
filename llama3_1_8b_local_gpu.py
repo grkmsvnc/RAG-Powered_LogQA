@@ -3,6 +3,7 @@ import numpy as np
 import faiss
 import pandas as pd
 import torch
+from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig, AutoConfig, pipeline
 from sklearn.preprocessing import StandardScaler
 
